@@ -1,0 +1,29 @@
+<script src="pdf.js"></script>
+<script src="pdf.worker.js"></script>
+<script src="pdf.merge.js"></script>
+
+<h1>Merge example</h1>
+
+<div id="documentos-container"></div>
+
+<style>
+    canvas {
+        border:1px solid black;
+    }
+</style>
+
+
+<script>
+// If absolute URL from the remote server is provided, configure the CORS
+// header on that server.
+    var urls = [
+
+        'http://localhost/pdfmerge/download.php?arquivo=5.pdf',
+        'http://localhost/pdfmerge/download.php?arquivo=6.pdf',
+        'http://localhost/pdfmerge/download.php?arquivo=2.pdf',
+        
+    ];
+    
+    pdfMerge(urls, 'documentos-container');
+
+</script>
