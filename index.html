@@ -18,6 +18,8 @@
         0%
     </div>
 </div>
+<button onclick="zoomIn()">+</button>
+
 <div id="documentos-container"></div>
 
 <style>
@@ -42,6 +44,6 @@
         'http://localhost/pdfmerge/download.php?arquivo=2.pdf',
     ];
 
-    pdfMerge(urls, 'documentos-container', 'progressBar');
+    pdfMerge(urls, 'documentos-container', 'progressBar', 'svg');
 
 </script>

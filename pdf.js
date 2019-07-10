@@ -13921,10 +13921,10 @@ var _pattern_helper = __w_pdfjs_require__(155);
 
 var MIN_FONT_SIZE = 16;
 var MAX_FONT_SIZE = 100;
-var MAX_GROUP_SIZE = 4096;
+var MAX_GROUP_SIZE = 60000;
 var MIN_WIDTH_FACTOR = 0.65;
 var COMPILE_TYPE3_GLYPHS = true;
-var MAX_SIZE_TO_COMPILE = 1000;
+var MAX_SIZE_TO_COMPILE = 10000;
 var FULL_CHUNK_HEIGHT = 16;
 var IsLittleEndianCached = {
   get value() {
