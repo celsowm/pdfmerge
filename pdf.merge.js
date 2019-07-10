@@ -1,3 +1,30 @@
+function zoom(mode = 'in') {
+    var svgs = document.querySelectorAll('svg');
+    for (svg of svgs) {
+        let originalWidth = svg.getAttribute('width');
+        let originalHeight = svg.getAttribute('height');
+        if (originalWidth !== null && originalHeight !== null) {
+            
+            originalWidth  = parseInt(originalWidth.replace(/\D/g,''));
+            originalHeight = parseInt(originalHeight.replace(/\D/g,''));
+
+            if(mode == 'in'){
+                svg.setAttribute('width',originalWidth+100);
+                //fix-me:
+                //svg.setAttribute('height',originalHeight+100); 
+            }else{
+                svg.setAttribute('width',originalWidth-100);
+                //fix-me:
+                //svg.setAttribute('height',originalHeight-100);
+            }
+            
+            //originalHeight = parseInt(originalHeight.replace(/\D/g,''));
+            //svg.setAttribute('height',originalHeight+100);
+        }
+
+    }
+}
+
 async function getVersion(pdf) {
 }
 function pdfMerge(urls, divRootId, progressBarId = undefined, renderMode = 'canvas') {
@@ -75,27 +102,37 @@ function pdfMerge(urls, divRootId, progressBarId = undefined, renderMode = 'canv
 
                             case 'svg':
 
+
                                 var container = document.createElementNS('http://www.w3.org/2000/svg', 'svg:svg');
 
 
+                                var div = document.createElement('div');
+                                //div.textContent = "Sup, y'all?";
+                                div.setAttribute('class', 'page-container');
+                                documentosDiv.appendChild(div);
+
                                 var viewport = page.getViewport({scale: 1});
 
-                                var scale = documentosDiv.clientWidth / viewport.width;        
-                                container.style.width = documentosDiv.offsetWidth;
-                                container.style.height = documentosDiv.offsetHeight;
-                                viewport = page.getViewport({scale: scale});    
+                                var scale = documentosDiv.offsetWidth / viewport.width;
+                                //container.style.width = documentosDiv.offsetWidth;
+                                container.style.width = "100%";
+                                //container.style.height = documentosDiv.offsetHeight;
 
-                                documentosDiv.appendChild(container);
+                                viewport = page.getViewport({scale: scale});
+
+                                div.appendChild(container);
 
                                 page.getOperatorList()
                                         .then(function (opList) {
-                                        
-                                        var svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
-                                        return svgGfx.getSVG(opList, viewport);
+
+                                            var svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
+                                            return svgGfx.getSVG(opList, viewport);
 
                                         }).then(function (svg) {
-                                            container.appendChild(svg);
-                                        });
+                                    container.appendChild(svg);
+                                    console.log(container.children[0].attributes.height.nodeValue);
+                                    container.style.height = container.children[0].attributes.height.nodeValue;
+                                });
 
                                 break;
                         }

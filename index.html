@@ -18,7 +18,8 @@
         0%
     </div>
 </div>
-<button onclick="zoomIn()">+</button>
+<button onclick="zoom('in')">+</button>
+<button onclick="zoom('out')">-</button>
 
 <div id="documentos-container"></div>
 
@@ -28,8 +29,10 @@
     }
     #documentos-container {
         height: 600px;
-        width: 400px;
+        width: 600px;
         overflow: auto;
+        padding-right: 5px;
+        
     }
 </style>
 
@@ -47,3 +50,11 @@
     pdfMerge(urls, 'documentos-container', 'progressBar', 'svg');
 
 </script>
+
+<style>
+    .page-container{
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        box-shadow: 5px 5px 3px #ddd;
+    }
+</style>
