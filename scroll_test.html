@@ -1,0 +1,50 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+	#container{
+		width: 400px;
+		height: 600px;
+		overflow: auto;
+	}
+	.page{
+		width: 400px;
+	}
+	.red {
+		background-color: red;
+		height: 600px;
+	}
+	.blue {
+		background-color: blue;
+		height: 400px;
+	}
+</style>
+
+Current page: <span id="page-counter">1</span>
+<div id='container'>
+	<div id="div-1" class="page red"></div>
+	<div id="div-2" class="page blue"></div>
+	<div id="div-3" class="page red"></div>
+	<div id="div-4" class="page blue"></div>
+	<div id="div-5" class="page red"></div>
+	<div id="div-6" class="page blue"></div>
+</div>
+<script>
+	document.addEventListener("DOMContentLoaded", function(event) {
+		var container = document.getElementById("container");
+		container.onscroll = function (){
+			let containerScroll = container.scrollTop;
+			let divs = document.querySelectorAll('.page');
+			for (var i = 0; i < divs.length; i++) {
+			
+				let div = divs[i];
+			
+				let sHeight = div.offsetHeight;
+				let offsets = div.offsetTop;
+
+				if (containerScroll >= offsets && containerScroll <= offsets + sHeight) {
+				  document.getElementById('page-counter').innerHTML = (i+1);
+				}
+			}
+		}
+	});
+</script>
+
